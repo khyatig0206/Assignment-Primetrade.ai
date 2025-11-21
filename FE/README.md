@@ -12,6 +12,8 @@
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/c54d640f-4bab-45a4-b05b-7a4ef20327ad" />
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/f2460f8b-1c2e-4f29-886a-f1b912309596" />
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/0751e504-35f4-482c-9e12-8c0aecae771e" />
+<img width="1365" height="647" alt="image" src="https://github.com/user-attachments/assets/83a674ef-f4c8-49c6-a5a5-ddf7493b1a92" />
+
 
 
 A modern, responsive React frontend for the Pallihaat digital marketplace, built with Next.js 14 and featuring multi-language support, real-time search, interactive maps, and a comprehensive producer dashboard.
