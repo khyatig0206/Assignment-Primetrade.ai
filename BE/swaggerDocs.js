@@ -89,6 +89,34 @@ const swaggerOptions = {
               }
             }
           }
+        },
+        Address: {
+          type: 'object',
+          properties: {
+            id: { type: 'integer' },
+            label: { type: 'string', example: 'Home' },
+            contactName: { type: 'string' },
+            contactPhone: { type: 'string' },
+            addressLine1: { type: 'string' },
+            addressLine2: { type: 'string' },
+            city: { type: 'string' },
+            state: { type: 'string' },
+            postalCode: { type: 'string' },
+            isDefault: { type: 'boolean' },
+            latitude: { type: 'number' },
+            longitude: { type: 'number' }
+          }
+        },
+        Review: {
+          type: 'object',
+          properties: {
+            id: { type: 'integer' },
+            rating: { type: 'integer', minimum: 1, maximum: 5 },
+            comment: { type: 'string' },
+            images: { type: 'array', items: { type: 'string' } },
+            createdAt: { type: 'string', format: 'date-time' },
+            User: { $ref: '#/components/schemas/User' }
+          }
         }
       },
     },
@@ -151,6 +179,126 @@ const swaggerOptions = {
           security: [{ bearerAuth: [] }],
           responses: {
             200: { description: 'Payment initialized', content: { 'application/json': { schema: { type: 'object', properties: { razorpayOrderId: { type: 'string' }, amount: { type: 'number' } } } } } }
+          }
+        }
+      },
+
+      // Address Management
+      '/api/addresses': {
+        get: {
+          tags: ['Address'],
+          summary: 'List all addresses',
+          security: [{ bearerAuth: [] }],
+          responses: {
+            200: { description: 'List of addresses', content: { 'application/json': { schema: { type: 'array', items: { $ref: '#/components/schemas/Address' } } } } }
+          }
+        },
+        post: {
+          tags: ['Address'],
+          summary: 'Create a new address',
+          security: [{ bearerAuth: [] }],
+          requestBody: {
+            required: true,
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  required: ['contactName', 'contactPhone', 'addressLine1', 'city', 'state', 'postalCode'],
+                  properties: {
+                    contactName: { type: 'string' },
+                    contactPhone: { type: 'string' },
+                    addressLine1: { type: 'string' },
+                    addressLine2: { type: 'string' },
+                    city: { type: 'string' },
+                    state: { type: 'string' },
+                    postalCode: { type: 'string' },
+                    latitude: { type: 'number' },
+                    longitude: { type: 'number' }
+                  }
+                }
+              }
+            }
+          },
+          responses: {
+            201: { description: 'Address created' }
+          }
+        }
+      },
+      '/api/addresses/{id}': {
+        put: {
+          tags: ['Address'],
+          summary: 'Update an address',
+          security: [{ bearerAuth: [] }],
+          parameters: [{ in: 'path', name: 'id', required: true, schema: { type: 'integer' } }],
+          requestBody: {
+            required: true,
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    contactName: { type: 'string' },
+                    contactPhone: { type: 'string' },
+                    addressLine1: { type: 'string' },
+                    addressLine2: { type: 'string' },
+                    city: { type: 'string' },
+                    state: { type: 'string' },
+                    postalCode: { type: 'string' }
+                  }
+                }
+              }
+            }
+          },
+          responses: {
+            200: { description: 'Address updated' }
+          }
+        },
+        delete: {
+          tags: ['Address'],
+          summary: 'Delete an address',
+          security: [{ bearerAuth: [] }],
+          parameters: [{ in: 'path', name: 'id', required: true, schema: { type: 'integer' } }],
+          responses: {
+            200: { description: 'Address deleted' }
+          }
+        }
+      },
+
+      // Reviews
+      '/api/reviews': {
+        post: {
+          tags: ['Reviews'],
+          summary: 'Add a review for a product',
+          security: [{ bearerAuth: [] }],
+          requestBody: {
+            required: true,
+            content: {
+              'multipart/form-data': {
+                schema: {
+                  type: 'object',
+                  required: ['productId', 'rating', 'comment'],
+                  properties: {
+                    productId: { type: 'integer' },
+                    rating: { type: 'integer', minimum: 1, maximum: 5 },
+                    comment: { type: 'string' },
+                    images: { type: 'array', items: { type: 'string', format: 'binary' } }
+                  }
+                }
+              }
+            }
+          },
+          responses: {
+            201: { description: 'Review added' }
+          }
+        }
+      },
+      '/api/reviews/product/{productId}': {
+        get: {
+          tags: ['Reviews'],
+          summary: 'Get reviews for a product',
+          parameters: [{ in: 'path', name: 'productId', required: true, schema: { type: 'integer' } }],
+          responses: {
+            200: { description: 'List of reviews', content: { 'application/json': { schema: { type: 'array', items: { $ref: '#/components/schemas/Review' } } } } }
           }
         }
       },
