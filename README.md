@@ -2,6 +2,60 @@
 
 This project is a scalable, full-stack web application built for the Frontend Developer Intern assignment. It features a modern, responsive frontend, a robust backend with authentication, and a comprehensive dashboard for managing products and orders.
 
+## 🌐 Live Demo & Credentials
+
+### Hosted Links
+*   **Frontend (App)**: [https://assignment-primetrade-ai-ndm1.vercel.app](https://assignment-primetrade-ai-ndm1.vercel.app)
+*   **Backend (API)**: [https://assignment-primetrade-ai.vercel.app/](https://assignment-primetrade-ai.vercel.app/)
+*   **API Documentation (Swagger)**: [https://assignment-primetrade-ai.vercel.app/api-docs/](https://assignment-primetrade-ai.vercel.app/api-docs/)
+
+### Demo Credentials
+
+You can use the following credentials to test the application's different roles:
+
+#### 👨‍💼 Admin (System Management)
+*   **Login Page**: [https://assignment-primetrade-ai-ndm1.vercel.app/admin/signin](https://assignment-primetrade-ai-ndm1.vercel.app/admin/signin)
+*   **Email**: `admin@example.com`
+*   **Password**: `1234`
+
+#### 🛒 User (Shopper)
+*   **Login Page**: [https://assignment-primetrade-ai-ndm1.vercel.app/signin](https://assignment-primetrade-ai-ndm1.vercel.app/signin)
+*   **Email**: `test@gmail.com`
+*   **Password**: `1234`
+
+#### 🌾 Producer (Seller)
+*   **Login Page**: [https://assignment-primetrade-ai-ndm1.vercel.app/producer/signin](https://assignment-primetrade-ai-ndm1.vercel.app/producer/signin)
+*   **Email**: `horti@gmail.com`
+*   **Password**: `1234`
+
+---
+
+## 📈 Scalability Notes
+
+To ensure this application scales effectively for production, the following strategies are recommended:
+
+1.  **Database Optimization**:
+    *   Use managed database services (AWS RDS, Google Cloud SQL) with read replicas to handle high traffic.
+    *   Implement connection pooling.
+
+2.  **Caching Strategy**:
+    *   Use **Redis** to cache frequently accessed data like product categories, user sessions, and popular products to reduce database load.
+    *   Implement CDN caching for static assets and product images.
+
+3.  **Microservices Architecture**:
+    *   Decouple the monolith into separate services:
+        *   **Auth Service**: User/Producer management.
+        *   **Product Service**: Catalog management.
+        *   **Order Service**: Transaction processing.
+    *   Use message queues (RabbitMQ/Kafka) for asynchronous tasks like notifications and analytics.
+
+4.  **Search Scaling**:
+    *   Host Meilisearch on a dedicated high-memory instance or use Algolia for managed search scaling.
+
+5.  **Infrastructure**:
+    *   Deploy using Docker/Kubernetes for container orchestration and auto-scaling based on CPU/Memory usage.
+    *   Use a Load Balancer (AWS ALB/Nginx) to distribute traffic across multiple backend instances.
+
 ## 🚀 Features
 
 ### Frontend (React/Next.js)
@@ -53,7 +107,7 @@ root/
 └── README.md           # This file
 ```
 
-## ⚙️ Setup Instructions
+## ⚙️ Setup Instructions (Local Development)
 
 ### Prerequisites
 *   Node.js (v16+)
@@ -70,24 +124,11 @@ root/
     ```bash
     npm install
     ```
-3.  Create a `.env` file in `BE/` with the following:
-    ```env
-    PORT=5000
-    DATABASE_URL=postgres://user:pass@localhost:5432/dbname
-    JWT_SECRET=your_secret_key
-    CLOUDINARY_CLOUD_NAME=your_cloud_name
-    CLOUDINARY_API_KEY=your_api_key
-    CLOUDINARY_API_SECRET=your_api_secret
-    MEILISEARCH_HOST=http://127.0.0.1:7700
-    MEILISEARCH_KEY=your_master_key
-    ```
-4.  Run database migrations (if applicable) or let Sequelize sync on start.
-5.  Start the server:
+3.  Create a `.env` file in `BE/` with your environment variables.
+4.  Start the server:
     ```bash
     npm run dev
     ```
-    The server will run at `http://localhost:5000`.
-    **API Docs**: Visit `http://localhost:5000/api-docs` for Swagger UI.
 
 ### 2. Frontend Setup
 1.  Navigate to the frontend directory:
@@ -98,41 +139,11 @@ root/
     ```bash
     npm install
     ```
-3.  Create a `.env.local` file in `FE/` with:
-    ```env
-    NEXT_PUBLIC_API_BASE_URL=http://localhost:5000
-    ```
+3.  Create a `.env.local` file in `FE/`.
 4.  Start the development server:
     ```bash
     npm run dev
     ```
-    The app will run at `http://localhost:3000`.
-
-## 📈 Scalability Notes
-
-To ensure this application scales effectively for production, the following strategies are recommended:
-
-1.  **Database Optimization**:
-    *   Use managed database services (AWS RDS, Google Cloud SQL) with read replicas to handle high traffic.
-    *   Implement connection pooling.
-
-2.  **Caching Strategy**:
-    *   Use **Redis** to cache frequently accessed data like product categories, user sessions, and popular products to reduce database load.
-    *   Implement CDN caching for static assets and product images.
-
-3.  **Microservices Architecture**:
-    *   Decouple the monolith into separate services:
-        *   **Auth Service**: User/Producer management.
-        *   **Product Service**: Catalog management.
-        *   **Order Service**: Transaction processing.
-    *   Use message queues (RabbitMQ/Kafka) for asynchronous tasks like notifications and analytics.
-
-4.  **Search Scaling**:
-    *   Host Meilisearch on a dedicated high-memory instance or use Algolia for managed search scaling.
-
-5.  **Infrastructure**:
-    *   Deploy using Docker/Kubernetes for container orchestration and auto-scaling based on CPU/Memory usage.
-    *   Use a Load Balancer (AWS ALB/Nginx) to distribute traffic across multiple backend instances.
 
 ## 🔒 Security
 
@@ -140,16 +151,6 @@ To ensure this application scales effectively for production, the following stra
 *   **Authentication**: Stateless JWT authentication.
 *   **Data Validation**: Input validation on both client and server sides.
 *   **CORS**: Configured to allow trusted origins.
-
-## 📝 API Documentation
-
-API documentation is available via Swagger UI at:
-`http://localhost:5000/api-docs`
-
-Key endpoints include:
-*   **Auth**: `/api/users/signup`, `/api/users/signin`
-*   **Products**: `/api/products` (GET, POST, PUT, DELETE)
-*   **Producers**: `/api/producer/signup`, `/api/producer/signin`
 
 ---
 **Author**: Frontend Developer Intern Candidate
