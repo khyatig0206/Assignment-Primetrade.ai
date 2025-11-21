@@ -15,16 +15,19 @@ You can use the following credentials to test the application's different roles:
 
 #### 👨‍💼 Admin (System Management)
 *   **Login Page**: [https://assignment-primetrade-ai-ndm1.vercel.app/admin/signin](https://assignment-primetrade-ai-ndm1.vercel.app/admin/signin)
+*   **Dashboard**: [https://assignment-primetrade-ai-ndm1.vercel.app/admin](https://assignment-primetrade-ai-ndm1.vercel.app/admin)
 *   **Email**: `admin@example.com`
 *   **Password**: `1234`
 
 #### 🛒 User (Shopper)
 *   **Login Page**: [https://assignment-primetrade-ai-ndm1.vercel.app/signin](https://assignment-primetrade-ai-ndm1.vercel.app/signin)
+*   **Dashboard (Account)**: [https://assignment-primetrade-ai-ndm1.vercel.app/account](https://assignment-primetrade-ai-ndm1.vercel.app/account)
 *   **Email**: `test@gmail.com`
 *   **Password**: `1234`
 
 #### 🌾 Producer (Seller)
 *   **Login Page**: [https://assignment-primetrade-ai-ndm1.vercel.app/producer/signin](https://assignment-primetrade-ai-ndm1.vercel.app/producer/signin)
+*   **Dashboard**: [https://assignment-primetrade-ai-ndm1.vercel.app/producer](https://assignment-primetrade-ai-ndm1.vercel.app/producer)
 *   **Email**: `horti@gmail.com`
 *   **Password**: `1234`
 
