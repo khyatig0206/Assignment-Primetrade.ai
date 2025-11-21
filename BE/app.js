@@ -15,7 +15,7 @@ app.use(
 app.use(express.json());
 const userRoutes = require("./routes/userRoutes");
 
-sequelize.sync({ alter: true })
+sequelize.sync()
   .then(() => console.log("✅ Database synced"))
   .catch((err) => console.error("❌ DB Sync Error:", err));
   
@@ -42,6 +42,12 @@ const disputeRoutes = require("./routes/disputeRoutes");
 app.use("/api/disputes", disputeRoutes);
 const producerDisputeRoutes = require("./routes/producerDisputeRoutes");
 app.use("/api/producer/disputes", producerDisputeRoutes);
+
+// Swagger API Documentation
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocs = require('./swaggerDocs');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+console.log("📄 Swagger docs available at /api-docs");
 
 // Search
 const searchRoutes = require("./routes/search");
