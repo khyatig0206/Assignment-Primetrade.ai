@@ -156,4 +156,4 @@ root/
 *   **CORS**: Configured to allow trusted origins.
 
 ---
-**Author**: Frontend Developer Intern Candidate
+**Author**: Khyati Gupta
