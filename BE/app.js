@@ -46,7 +46,16 @@ app.use("/api/producer/disputes", producerDisputeRoutes);
 // Swagger API Documentation
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocs = require('./swaggerDocs');
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+// Use CDN for Swagger UI assets to avoid static file serving issues on Vercel
+const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui.min.css";
+const JS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-bundle.js";
+const JS_PRESET_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-standalone-preset.js";
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs, {
+  customCssUrl: CSS_URL,
+  customJs: [JS_URL, JS_PRESET_URL]
+}));
 console.log("📄 Swagger docs available at /api-docs");
 
 // Search
